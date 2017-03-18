@@ -1,0 +1,24 @@
+service: slack-meetup-invite
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+#  region: us-west-2
+#  profile: profile
+  memorySize: 256
+  timeout: 10
+  environment:
+    SLACK_TOKEN: ${opt:SLACK_TOKEN}
+    SLACK_TEAM_NAME: ${opt:SLACK_TEAM_NAME}
+
+functions:
+  githubWebhookListener:
+    name: SlackMeetupInviteBackend
+    description: Creates an invitation on Slack
+    handler: handler.invite
+    events:
+      - http:
+          path: invite
+          method: post
+          integration: lambda
+          cors: true

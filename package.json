@@ -1,0 +1,19 @@
+{
+  "name": "slack-meetup-invite",
+  "version": "1.0.0",
+  "description": "Serverless Slack invite users backend",
+  "keywords": [
+    "slack",
+    "invite",
+    "invitation",
+    "meetup"
+  ],
+  "author": {
+    "name": "Serhat Can",
+    "email": "can.srht@gmail.com"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "request": "^2.81.0"
+  }
+}
