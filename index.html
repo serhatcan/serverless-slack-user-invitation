@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Welcome to Serverless Turkey Slack team invitation page!</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color: #eee;
+        }
+
+        .invite-form {
+            max-width: 400px;
+            padding: 15px;
+            margin: 0 auto;
+        }
+
+        .form-control {
+            position: relative;
+            height: auto;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .form-control:focus {
+            z-index: 2;
+        }
+
+        input[type="email"] {
+            margin-bottom: 10px;
+        }
+
+        .social-links {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container" id="app">
+    <div class="invite-form">
+        <h2 class="form-signin-heading">Get Invitation to Serverless Turkey Meetup Slack Group</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address"
+               required autofocus
+               v-model="event.email">
+        <button class="btn btn-lg btn-primary btn-block" v-on:click="sendInvitation">Get your
+            invitation
+        </button>
+        <h3><span class="label label-default">{{ responseText }}</span></h3>
+        <div class="social-links">
+            <div><a href="https://www.meetup.com/Serverless-Turkey/" target="_blank">Serverless Turkey Meetup</a></div>
+            <div><a href="https://twitter.com/serverlesstr/" target="_blank">Serverless Twitter Account</a></div>
+            <div><a href="https://medium.com/serverless-turkey/" target="_blank">Serverless Turkey Medium Blog</a></div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/vue/2.0.0/vue.min.js"></script>
+<script src="https://cdn.jsdelivr.net/vue.resource/1.2.1/vue-resource.min.js"></script>
+<script>
+    var inviteEndpoint = "apiendpointhere";
+
+    new Vue({
+                el: '#app',
+                data: {
+                    event: {email: ''},
+                    responseText: ''
+                },
+
+                methods: {
+                    sendInvitation: function () {
+                        if (this.event.email.trim()) {
+                            this.$http.post(inviteEndpoint, this.event)
+                                    .then(function (res) {
+                                        this.responseText = res.body.body;
+                                    }, function () {
+                                        this.responseText =
+                                                "Something happened. Please reach us on our Meetup page."
+                                    })
+                        }
+                    }
+                }
+            }
+    )
+</script>
+</html>
