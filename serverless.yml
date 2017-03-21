@@ -12,7 +12,7 @@ provider:
     SLACK_TEAM_NAME: ${opt:SLACK_TEAM_NAME}
 
 functions:
-  githubWebhookListener:
+  slackMeetupInviteBackend:
     name: SlackMeetupInviteBackend
     description: Creates an invitation on Slack
     handler: handler.invite
